@@ -1,0 +1,56 @@
+<html>
+<head>
+  <title>Comments</title>
+  <link href="stylesheets/style.css" rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+  <script src="javascripts/app.js"></script>
+
+</head>
+<body ng-app="comment" ng-controller="MainCtrl" data-ng-init="getAll()">
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+<div class="page-header"> 
+  <h1>Comments </h1>
+</div>
+
+  <form ng-submit="addComment()" style = "margin-top30px;">
+    <input type="text" ng-model="formContent"></input>
+    <button type="submit">Add Comment</button>
+  </form>
+  <!--<button onclick="getAll()">Show Database</button>-->
+  <div>
+    {{test}}
+  </div>
+  <div ng-repeat="comment in comments | orderBy: '-upvotes'">
+    <span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(comment)"></span>
+    {{comment.title}} - upvotes: {{comment.upvotes}}
+  </div>
+</div>
+</div>
+
+<div id="main" ng-app>
+  <!-- The navigation menu will get the value of the "active" variable as a class.
+     The $event.preventDefault() stops the page from jumping when a link is clicked. -->
+
+  <nav class="{{active}}" ng-click="$event.preventDefault()">
+
+    <!-- When a link in the menu is clicked, we set the active variable -->
+
+    <a href="#" class="home" ng-click="active='home'">Home</a>
+    <a href="#" class="portfolio" ng-click="active='portfolio'">Porfolio</a>
+    <a href="#" class="about" ng-click="active='about'">About</a>
+    <a href="#" class="contact" ng-click="active='contact'">Contact</a>
+  </nav>
+
+  <!-- ng-show will show an element if the value in the quotes is truthful,
+     while ng-hide does the opposite. Because the active variable is not set
+     initially, this will cause the first paragraph to be visible. -->
+
+  <p ng-hide="active">Please click a menu item</p>
+  <p ng-show="active"><b>{{active}}</b></p>
+</div>
+
+
+</body>
+</html>
